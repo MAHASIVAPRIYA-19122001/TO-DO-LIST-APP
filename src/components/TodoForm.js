@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 
 const TodoForm = ({ addTask }) => {
-  const [combinedInput, setCombinedInput] = useState('');
+  const [taskInput, setTaskInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Split the combined input into task and date
-    const [task, date] = combinedInput.split(',');
-
-    // Add your logic to handle the task and date values
-    if (task.trim() !== '' && date.trim() !== '') {
-      addTask({ task, date });
-      setCombinedInput('');
+    // Add your logic to handle the task value
+    if (taskInput.trim() !== '') {
+      addTask(taskInput); // Pass the taskInput as a string
+      setTaskInput('');
     }
   };
 
@@ -20,9 +17,9 @@ const TodoForm = ({ addTask }) => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Add a new task and date (e.g., Task Name,2024-01-31)"
-        value={combinedInput}
-        onChange={(e) => setCombinedInput(e.target.value)}
+        placeholder="Add a new task"
+        value={taskInput}
+        onChange={(e) => setTaskInput(e.target.value)}
       />
       <button type="submit">Add Task</button>
     </form>
@@ -30,3 +27,4 @@ const TodoForm = ({ addTask }) => {
 };
 
 export default TodoForm;
+
